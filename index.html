@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Predictions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #126e82, #051937);
+            min-height: 100vh;
+        }
+        
+        .glassmorphism {
+            background: rgba(18, 18, 18, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+        
+        .prediction-card {
+            width: 90%;
+            max-width: 500px;
+            margin: 2rem auto;
+            overflow: hidden;
+        }
+        
+        .gauge {
+            position: relative;
+            width: 80px;
+            height: 40px;
+            overflow: hidden;
+        }
+        
+        .gauge-background {
+            width: 100%;
+            height: 80px;
+            border-radius: 80px 80px 0 0;
+            background: rgba(50, 50, 50, 0.3);
+            position: absolute;
+        }
+        
+        .gauge-fill {
+            width: 100%;
+            height: 80px;
+            border-radius: 80px 80px 0 0;
+            background: linear-gradient(90deg, #22c55e, #16a34a);
+            position: absolute;
+            transform-origin: bottom center;
+        }
+        
+        .option-button {
+            transition: all 0.3s ease;
+        }
+        
+        .option-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .star-icon {
+            transition: all 0.2s ease;
+        }
+        
+        .star-icon:hover {
+            transform: scale(1.1);
+            color: #facc15;
+        }
+        
+        .bitcoin-logo {
+            background-color: #f7931a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="p-4">
+    <div class="prediction-card glassmorphism p-4">
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-4">
+            <span class="text-white bg-purple-900 px-4 py-1 rounded-md">Crypto</span>
+            <button class="star-icon text-gray-300 hover:text-yellow-400 focus:outline-none">
+                <i class="bi bi-star text-2xl"></i>
+            </button>
+        </div>
+        
+        <!-- Title with Bitcoin logo -->
+        <div class="flex items-center gap-4 mb-4">
+            <div class="bitcoin-logo w-12 h-12 flex-shrink-0">
+                <i class="bi bi-currency-bitcoin text-2xl"></i>
+            </div>
+            <h2 class="text-white text-2xl font-semibold">Bitcoin all time high in May?</h2>
+            
+            <!-- Gauge -->
+            <div class="gauge ml-auto">
+                <div class="gauge-background"></div>
+                <div class="gauge-fill" style="transform: rotate(37.8deg);"></div>
+                <div class="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center">
+                    <span class="text-white font-bold text-lg">21%</span>
+                    <span class="text-red-500 text-xs">↓2%</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Options -->
+        <div class="flex gap-3 mb-4">
+            <button class="option-button bg-lime-400 rounded-md p-4 w-1/2 text-left">
+                <div class="text-black text-xl font-semibold">Yes</div>
+                <div class="text-black opacity-80">0.25 aprMON</div>
+            </button>
+            <button class="option-button bg-purple-600 rounded-md p-4 w-1/2 text-left">
+                <div class="text-white text-xl font-semibold">No</div>
+                <div class="text-white opacity-80">0.79 aprMON</div>
+            </button>
+        </div>
+        
+        <!-- Footer -->
+        <div class="flex justify-between items-center">
+            <div class="flex items-center text-purple-300">
+                <i class="bi bi-flower3 mr-2 text-xl"></i>
+                <span class="text-lg font-medium">3,850.87 aprMON</span>
+            </div>
+            <button class="text-gray-300 hover:text-white">
+                <i class="bi bi-chat-square text-2xl"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Toggle star functionality
+            const starButton = document.querySelector('.star-icon');
+            let isFavorite = false;
+            
+            starButton.addEventListener('click', function() {
+                isFavorite = !isFavorite;
+                if (isFavorite) {
+                    this.innerHTML = '<i class="bi bi-star-fill text-2xl"></i>';
+                    this.classList.add('text-yellow-400');
+                    this.classList.remove('text-gray-300');
+                } else {
+                    this.innerHTML = '<i class="bi bi-star text-2xl"></i>';
+                    this.classList.add('text-gray-300');
+                    this.classList.remove('text-yellow-400');
+                }
+            });
+            
+            // Simulate option selection
+            const optionButtons = document.querySelectorAll('.option-button');
+            optionButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Add visual feedback
+                    this.classList.add('ring-4');
+                    this.classList.add('ring-white');
+                    
+                    // Reset other button
+                    optionButtons.forEach(btn => {
+                        if (btn !== this) {
+                            btn.classList.remove('ring-4');
+                            btn.classList.remove('ring-white');
+                        }
+                    });
+                    
+                    // Simulate API call or data update
+                    const selectedOption = this.querySelector('div:first-child').textContent;
+                    console.log(`Selected option: ${selectedOption}`);
+                    
+                    // You could add actual API call here using the AI Operations endpoint
+                });
+            });
+        });
+    </script>
+<script>document.body.addEventListener('wheel', e => { if (!e.ctrlKey) return; e.preventDefault(); return }, { passive: false })</script>
+	</body>
+</html>
